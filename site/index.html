@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <script src="node_modules/jquery/dist/jquery.js"></script>
+        <link href="signin.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        
+    </head>
+    <body class="text-center">
+
+        <script type="text/javascript">
+
+            function sendText(){
+
+                $.ajax({
+
+                    type: "POST", 
+                    contentType: 'application/json',
+                    url: "https://localhost:44396/TextMetric", 
+                    data:
+
+                        JSON.stringify({
+                            text: $('#text').val()
+                        
+
+                }), 
+
+                success: function (data) {
+                    alert(data.text);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    console.log(errorThrown);
+                },
+                    dataType: "json" 
+
+                });
+
+                /*var xhr = new XMLHttpRequest();
+                
+                xhr.onload = function() {
+
+                    let a = xhr.response;
+                    alert(a);
+
+                }
+
+                xhr.open("GET", 'https://localhost:44396/TextMetric/' + document.getElementById("text").value);
+                xhr.responseType = 'text';
+
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+                xhr.send();*/
+            }
+            
+        </script>
+
+        
+        <form class="form-signin">            
+            <h1 class="h3 mb-3 font-weight-normal">Please input text</h1>
+            <textarea type="text" id="text"></textarea>
+            <input class="btn btn-lg btn-primary btn-block" value="Check text" onclick="sendText()">
+            <p class="mt-5 mb-3 text-muted">&copy; 2020</p>
+        </form>
+    </body>
+</html>
